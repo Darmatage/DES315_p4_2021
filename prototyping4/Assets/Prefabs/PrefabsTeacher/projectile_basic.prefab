@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2944768514578458036}
   m_Layer: 0
   m_Name: projectile_basic
-  m_TagString: Untagged
+  m_TagString: hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb2a27be390d6145b914c992ff2e4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 1
   impactParticles: {fileID: 4717501512765351810, guid: 71f4c3bd5b918d943ab777707fd1e472,
     type: 3}
   bulletLife: 2
