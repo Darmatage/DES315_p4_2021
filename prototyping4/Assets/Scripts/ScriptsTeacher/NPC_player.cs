@@ -5,9 +5,12 @@ using UnityEngine;
 public class NPC_player : MonoBehaviour{
 
 	//movement
+	public Rigidbody rb;
 	public float rotationRate;
+	private Vector3 eulerAngleVelocity;
 
 	//weapon fire
+	public bool canShoot = true;
 	public float projectileForce = 60f;
     public Transform firePoint;
     public GameObject projectilePrefab;
@@ -21,25 +24,29 @@ public class NPC_player : MonoBehaviour{
 	void Start(){		
 		fireTime = Random.Range(0.1f,0.8f);
 		rotationRate = Random.Range(10,30);
+		rb = gameObject.GetComponent<Rigidbody>();
+		eulerAngleVelocity = new Vector3(0, rotationRate, 0);
 	}
 
 	void Update(){
-		void Update () {
-			transform.Rotate (new Vector3 (0, rotationRate, 0) * Time.deltaTime);
-        }
 		if (botHealth <= 0){
 			Destroy(gameObject);
 		}
      } 
 
-
     void FixedUpdate(){
         fireTimer += .01f;
 		if (fireTimer >= fireTime){
-			Shoot();
+			if (canShoot == true){
+				Shoot();
+			}
 			fireTimer = 0;
 		}
-    }
+		//transform.Rotate (new Vector3 (0, rotationRate, 0) * Time.deltaTime);
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
+	}
+	
 	
 	
 	void Shoot(){
@@ -48,14 +55,18 @@ public class NPC_player : MonoBehaviour{
             rb.AddForce(firePoint.forward * projectileForce, ForceMode.Impulse);
     }
 	
-	void OnCollionEnter(Collision other){
+	public void OnCollisionEnter(Collision other){
+		//Debug.Log("a bot has been hit");
 		if (other.gameObject.tag == "hazard"){
+//		if (other.gameObject.tag == "hazard"){
+			Debug.Log("a bullet hit a bot");
 			int damage = other.gameObject.GetComponent<Hazard>().Damage;
 			botHealth -= damage;
-		}
-		
+		}	
 	}
 	
-	
-	
 }
+
+
+// rigidbody MovePosition
+//rb.MovePosition(transform.position + (transform.forward * time.deltaTime * speedToMoveForward));

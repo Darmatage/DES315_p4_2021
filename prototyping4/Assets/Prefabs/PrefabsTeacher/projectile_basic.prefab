@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2944768514578458037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  impactParticles: {fileID: 4717501512765351810, guid: 71f4c3bd5b918d943ab777707fd1e472,
+  impactParticles: {fileID: 4717501512765351810, guid: ae46f1d8df492ea4bb04f77e474773db,
+    type: 3}
+  nohitParticles: {fileID: 4717501512765351810, guid: 71f4c3bd5b918d943ab777707fd1e472,
     type: 3}
   bulletLife: 2
