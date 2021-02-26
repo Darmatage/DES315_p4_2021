@@ -22,8 +22,11 @@ public class CameraFollowOrbit : MonoBehaviour{
      void LateUpdate(){
      offsetX = Quaternion.AngleAxis (Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offsetX;
      offsetY = Quaternion.AngleAxis (Input.GetAxis("Mouse Y") * turnSpeed, Vector3.right) * offsetY;
-     transform.position = player.position + offsetX + offsetY;
-     transform.LookAt(player.position);
+     
+	 if (player != null){
+		transform.position = player.position + offsetX + offsetY;
+		transform.LookAt(player.position);
+	 }
  }
 }
 

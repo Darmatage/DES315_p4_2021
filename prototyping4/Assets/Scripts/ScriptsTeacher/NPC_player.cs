@@ -55,10 +55,9 @@ public class NPC_player : MonoBehaviour{
             rb.AddForce(firePoint.forward * projectileForce, ForceMode.Impulse);
     }
 	
-	public void OnCollisionEnter(Collision other){
-		//Debug.Log("a bot has been hit");
-		if (other.gameObject.tag == "hazard"){
-//		if (other.gameObject.tag == "hazard"){
+	public void OnTriggerEnter(Collider other){
+		Debug.Log($"a bot has been hit: {other.gameObject.tag} " + "\n the object name is: " + other.gameObject.name);
+		if (other.gameObject.tag == "bullet"){
 			Debug.Log("a bullet hit a bot");
 			int damage = other.gameObject.GetComponent<Hazard>().Damage;
 			botHealth -= damage;

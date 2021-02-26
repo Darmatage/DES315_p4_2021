@@ -12,8 +12,8 @@ public class Player_getHit : MonoBehaviour{
 		}
      } 	
 		
-	public void OnCollisionEnter(Collision other){
-		if (other.gameObject.tag == "hazard"){
+	public void OnTriggerEnter(Collider other){
+		if (other.gameObject.tag == "bullet"){
 			Debug.Log("a bullet hit the player");
 			int damage = other.gameObject.GetComponent<Hazard>().Damage;
 			playerHealth -= damage;
