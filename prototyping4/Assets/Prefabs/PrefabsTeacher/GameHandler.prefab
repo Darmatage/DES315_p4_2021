@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6531065877663715873}
   m_Layer: 0
   m_Name: GameHandler
-  m_TagString: Untagged
+  m_TagString: GameHandler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,3 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad87f536f163f04093c63fcc13e2423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 0}
+  mixer: {fileID: 0}
+  playerHitsStart: 0
+  playerHealthStart: 20
+  playerHitsText: {fileID: 0}
+  playerHealthText: {fileID: 0}
+  gameTime: 60
+  gameTimerText: {fileID: 0}

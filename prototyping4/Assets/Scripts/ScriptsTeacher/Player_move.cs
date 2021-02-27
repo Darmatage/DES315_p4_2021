@@ -19,6 +19,9 @@ public class Player_move : MonoBehaviour {
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+	public bool isDriving = false;
+	public GameObject myVehicle;
+
     void Update () {
         float horiz = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
@@ -29,9 +32,13 @@ public class Player_move : MonoBehaviour {
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
-        }
-
+            if (isDriving == false){
+				controller.Move(moveDir.normalized * speed * Time.deltaTime);
+			} else if (isDriving == true){
+				myVehicle.GetComponent<CharacterController>().Move(moveDir.normalized * speed * Time.deltaTime);
+			}
+		}
+		
         //JUMP
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0){
@@ -46,4 +53,28 @@ public class Player_move : MonoBehaviour {
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+	
+	
+	public void GetOnVehicle(GameObject vehicle, GameObject driverPos, GameObject exitPos){
+		gameObject.transform.parent = driverPos.transform;
+		
+		Vector3 newPos = driverPos.transform.position;
+		gameObject.GetComponent<CharacterController>().enabled = false;
+		transform.position = newPos;
+		
+		isDriving = true;
+		myVehicle = vehicle;
+	}
+
+	public void GetOffVehicle(GameObject vehicle, GameObject driverPos, GameObject exitPos){
+		Vector3 newPos = exitPos.transform.position;
+		transform.position = newPos;
+		gameObject.GetComponent<CharacterController>().enabled = true;
+		gameObject.transform.parent = null;
+		isDriving = false;
+	}
+
+
+	
+	
 } 

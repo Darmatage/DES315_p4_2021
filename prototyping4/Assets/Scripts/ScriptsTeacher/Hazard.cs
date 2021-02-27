@@ -23,14 +23,14 @@ public class Hazard : MonoBehaviour{
 		if ((bulletTimer >= bulletLife)&&(bulletExists == true)){
 			bulletExists = false;
 			gameObject.GetComponent<Collider>().enabled = false;
-			gameObject.GetComponent<MeshRenderer>().enabled = false;
+			gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
 			StartCoroutine(NoHitResult());
 		}
 	}
 
     void OnTriggerEnter(Collider other){
 		gameObject.GetComponent<Collider>().enabled = false;
-		gameObject.GetComponent<MeshRenderer>().enabled = false; 
+		gameObject.GetComponentInChildren<MeshRenderer>().enabled = false; 
 		StartCoroutine(ImpactResult());
 	}
     

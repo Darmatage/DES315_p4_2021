@@ -14,7 +14,7 @@ public class NPC_player : MonoBehaviour{
 	public float projectileForce = 60f;
     public Transform firePoint;
     public GameObject projectilePrefab;
-	public float fireTime;
+	public float fireTime = 0.2f;
 	private float fireTimer;
 
 	//health stat
@@ -47,8 +47,6 @@ public class NPC_player : MonoBehaviour{
         rb.MoveRotation(rb.rotation * deltaRotation);
 	}
 	
-	
-	
 	void Shoot(){
             GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -56,9 +54,9 @@ public class NPC_player : MonoBehaviour{
     }
 	
 	public void OnTriggerEnter(Collider other){
-		Debug.Log($"a bot has been hit: {other.gameObject.tag} " + "\n the object name is: " + other.gameObject.name);
+		//Debug.Log($"a bot has been hit: {other.gameObject.tag} " + "\n the object name is: " + other.gameObject.name);
 		if (other.gameObject.tag == "bullet"){
-			Debug.Log("a bullet hit a bot");
+			//Debug.Log("a bullet hit a bot");
 			int damage = other.gameObject.GetComponent<Hazard>().Damage;
 			botHealth -= damage;
 		}	
